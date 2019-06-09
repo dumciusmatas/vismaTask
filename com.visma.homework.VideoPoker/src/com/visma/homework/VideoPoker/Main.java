@@ -2,10 +2,12 @@ package com.visma.homework.VideoPoker;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Main {
 
@@ -45,6 +47,10 @@ public class Main {
 				validInput = false;
 				System.out.println(
 						"Invalid input (Too many numbers provided). Please repeat.\nPlease enter numbers of cards you would like to change (separated by a space) or press ENTER if no changes required:");
+			} else if(checkForDuplicates(indexes)) {
+				validInput = false;
+				System.out.println(
+						"Invalid input (Card number duplicates found). Please repeat.\nPlease enter numbers of cards you would like to change (separated by a space) or press ENTER if no changes required:");
 			} else {
 				// check if input are numbers from 1 to 5
 				validInput = true;
@@ -235,5 +241,16 @@ public class Main {
 			}
 		}
 		return true;
+	}
+
+	public static boolean checkForDuplicates(String[] array) {
+		Set<String> temp = new HashSet<>();
+		for (String string : array) {
+			if (temp.contains(string)) {
+				return true;
+			}
+			temp.add(string);
+		}
+		return false;
 	}
 }
